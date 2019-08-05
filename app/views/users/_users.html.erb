@@ -1,0 +1,15 @@
+<% if users.any? %>
+
+  <ul class="list-unstyles">
+    <% users.each do |user| %>
+    <li class="media">
+      <img class="mr-2 circle" src="#" alt="#">
+      <div class="media-body">
+        <%= user.name %>
+        <%= link_to 'View profile', user_path(user) %>
+      </div>
+    </li>
+    <% end %>
+  </ul>
+  <%= paginate users %>
+<% end %>
