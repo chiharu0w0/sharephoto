@@ -1,6 +1,8 @@
 <div class="row">
   <aside class="col-sm-4">
-    <h3>Profile image</h3>
+    <p>image
+    <%= image_tag(@user.profile_image.url, size: "30×30") unless @user.profile_image.file.nil? %>
+    </p>
   </aside>
   
   <div class="col-sm-8">
@@ -13,8 +15,10 @@
 
   <div>
     <ul class="nav nav-tabs nav-justified mb-3">
-      <li class="nav-item"><a href="#" class="nav-link">Post</a></li>
+      <li class="nav-item"><a href="#" class="nav-link">Post <span class="badge badge-secondary"><%= @count_posts %></span></a></li>
       <li class="nav-item"><a href="#" class="nav-link">Like</a></li>
     </ul>
+    
+    <%= render 'posts/posts', posts: @posts %>
   </div>
 </div>

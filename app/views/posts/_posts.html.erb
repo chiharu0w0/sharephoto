@@ -1,0 +1,17 @@
+<div>
+  <% posts.each do |post| %>
+  
+    <%= post.image %>
+    <br>
+    <%= post.description %>
+</div>
+
+<% if current_user == post.user %>
+
+<%= link_to "Delete", post, method: :delete, data: { confirm: 'You sure?' }, class: 'btn btn-danger btn-sm' %>
+
+<% end %>
+
+<% end %>
+
+<%= paginate posts %>

@@ -1,5 +1,10 @@
 <% if logged_in? %>
   <p>ログイン完了ユーザ：<%= current_user.name %></p>
+  <% @users.each do |user| %>
+    <tr>
+      <td><%= user.profile_image %></td>
+    </tr>
+  <% end %>
 <% else %>
   <div class="center jumbotron">
     <div class="text-center">
