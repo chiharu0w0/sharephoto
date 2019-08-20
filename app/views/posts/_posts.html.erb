@@ -1,17 +1,22 @@
-<div>
+<% if logged_in? %>
+<div class="row">
+
   <% posts.each do |post| %>
+  <div class="card">
+    <div class="card-top mt-3 ml-3">
+      <%= post.user.name %>
+    </div>
+    <div class="card-body">
+      <%= image_tag post.image.to_s, size: "200x200" %>
+    </div>
+    <div class="card-text mb-3 ml-3">
+      <%= link_to 'more...', post_path(post) %>
+    </div>
+  </div>
+
+
+<% end %>
   
-    <%= post.image %>
-    <br>
-    <%= post.description %>
-</div>
-
-<% if current_user == post.user %>
-
-<%= link_to "Delete", post, method: :delete, data: { confirm: 'You sure?' }, class: 'btn btn-danger btn-sm' %>
-
-<% end %>
-
-<% end %>
-
 <%= paginate posts %>
+
+<% end %>

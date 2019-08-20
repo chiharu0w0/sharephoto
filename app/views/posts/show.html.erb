@@ -1,0 +1,56 @@
+<div class="card w-70 h-70">
+
+  <div class="card-top mt-3 ml-3">
+    <%= image_tag @post.user.profile_image.to_s, size: "100x100" %>
+    <%= link_to @post.user.name, user_path(@post.user) %>
+  </div>
+  
+  <div class="card-body">
+    <%= image_tag @post.image.to_s, class: "col-sm-6" %>
+    <p class="card-text">posted at<%= @post.created_at %></p>
+    
+    <p class="card-text"><%= @post.description %></p>
+  </div>
+  <div class="card-bottom btn-toolbar mb-3 ml-3">
+    <div class="btn-group"><%= render 'favorites/like_button', post: @post %></div>
+    <% if current_user == @post.user %>
+    <div class="btn-group"><%= link_to "Delete", @post, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-sm' %></div>
+          
+  </div>
+    <% end %>
+</div>
+
+<div class="card w-60 h-60">
+
+  <% @comments.each do |comment| %>
+  <div class="card">
+    <div class="card-top mt-3 ml-3">
+      <%= image_tag comment.user.profile_image.to_s, size: "50x50", class: "rounded-circle" %>
+      <%= link_to comment.user.name, user_path(comment.user) %>
+    </div>
+    <div class="card-body">
+      <%= comment.content %>
+      <% if current_user == comment.user %>
+    </div>
+    <div class="card-bottom mb-3 ml-3">
+      <%= link_to "Delete", comment, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-sm' %>
+      <% end %>
+    </div>
+  </div>
+  <% end %>
+</div>
+
+<div class="card w-60 h-60">
+  <div class="card-top mt-3 ml-3">
+    <%= image_tag current_user.profile_image.to_s, size: "50x50", class: "rounded-circle mb-3" %>
+    <%= current_user.name %>
+  </div>
+  
+  <%= form_with(model: @comment, scope: :comment, url: post_comments_path(@post), local: true) do |f| %>
+    <div class="card-text form-group">
+      <%= f.label :comment, "Comment" %>
+      <%= f.text_field :content, class: 'form-control' %>
+    </div>
+    <%= f.submit 'Send', class: 'btn btn-primary btn-block' %>
+  <% end %>
+</div>

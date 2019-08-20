@@ -1,15 +1,18 @@
 <% if users.any? %>
 
-  <ul class="list-unstyles">
-    <% users.each do |user| %>
-    <li class="media">
-      <img class="mr-2 circle" src="#" alt="#">
-      <div class="media-body">
+<div class="row">
+<% users.each do |user| %>
+  <div class="card" style="width: 18rem; height: 18rem;">
+    <div class="card-body">
+      
+      <%= image_tag user.profile_image.to_s, size: "200x200" %>
+      <h5 class="card-title">
         <%= user.name %>
-        <%= link_to 'View profile', user_path(user) %>
-      </div>
-    </li>
-    <% end %>
-  </ul>
+      </h5>
+      <a><%= link_to "profile", user_path(user) %></a>
+    </div>
+  </div>
+<% end %>
+</div>
   <%= paginate users %>
 <% end %>

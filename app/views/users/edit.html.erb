@@ -1,0 +1,34 @@
+<h3>Update your profile</h3>
+
+    <%= form_with(model: @user, local:true) do |f| %>
+    <%= render 'layouts/error_messages', model: f.object %>
+    
+    <div class="form-group">
+      <%= f.label :profile_image, 'Profile Image' %>
+      <br>
+      <%= image_tag @user.profile_image.url(:thumb) if @user.profile_image? %>
+      <%= f.file_field :profile_image  %>
+    </div>
+    
+    <div class="form-group">
+      <%= f.label :name, 'Name' %>
+      <%= f.text_field :name, class: 'form-control' %>
+    </div>
+    
+    <div class="form-group">
+      <%= f.label :email, 'Email' %>
+      <%= f.email_field :email, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :password, 'Password' %>
+      <%= f.password_field :password, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :password_confirmation, 'Confirmation' %>
+      <%= f.password_field :password_confirmation, class: 'form-control' %>
+    </div>
+  <%= f.submit 'Save', class: "btn btn-primary" %>
+  
+<% end %>

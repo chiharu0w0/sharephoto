@@ -1,23 +1,38 @@
 <div class="row">
-  <aside class="col-sm-4">
-    <p>image
-    <%= image_tag(@user.profile_image.url, size: "30×30") unless @user.profile_image.file.nil? %>
-    </p>
-  </aside>
+  <%= image_tag @user.profile_image.to_s, size: "100x100" %>
   
   <div class="col-sm-8">
-    <h3><%= @user.name %></h3>
-    <ul class="nav">
-      <li class="nav-item"><a href="#" class="nav-link">Following</a></li>
-      <li class="nav-item"><a href="#" class="nav-link">Follower</a></li>
+    <h3><%= @user.name %> <%= render 'relationships/follow_button', user: @user %></h3>
+    <br>
+    <%= link_to 'edit', edit_user_path %>
+    <ul class="nav nav-pills">
+      
+      <li class="nav-item"><a href="<%= followings_user_path(@user) %>" class="nav-link 
+        <%= 'active' if current_page?(followings_user_path(@user)) %>">Following  
+        <span class="badge badge-secondary"><%= @count_followings %></span></a>
+      </li>
+      
+      <li class="nav-item"><a href="<%= followers_user_path(@user) %>" class="nav-link 
+        <%= 'active' if current_page?(followers_user_path(@user)) %>">Follower  
+        <span class="badge badge-secondary"><%= @count_followers %></span></a>
+      </li>
     </ul>
-  </div>
 
-  <div>
-    <ul class="nav nav-tabs nav-justified mb-3">
-      <li class="nav-item"><a href="#" class="nav-link">Post <span class="badge badge-secondary"><%= @count_posts %></span></a></li>
-      <li class="nav-item"><a href="#" class="nav-link">Like</a></li>
-    </ul>
+    <div>
+      <ul class="nav nav-tabs nav-justified mb-3">
+        
+        <li class="nav-item"><a href="<%= user_path(@user) %>" class="nav-link
+          <%= 'active' if current_page?(user_path(@user)) %>">Post 
+          <span class="badge badge-secondary"><%= @count_posts %></span></a>
+        </li>
+      
+        <li class="nav-item"><a href="<%= likes_user_path(@user) %>" class="nav-link
+          <%= 'active' if current_page?(likes_user_path(@user)) %>">Likes 
+          <span class="badge badge-secondary"><%= @count_favposts %></span></a>
+        </li>
+      </ul>
+    
+    </div>
     
     <%= render 'posts/posts', posts: @posts %>
   </div>
