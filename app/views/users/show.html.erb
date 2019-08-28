@@ -1,10 +1,16 @@
 <div class="row">
+  <% if @user.profile_image? %>
   <%= image_tag @user.profile_image.to_s, size: "100x100" %>
+  <% else %>
+  <%= image_tag "default_img.jpg", size: "100x100" %>
+  <% end %>
   
   <div class="col-sm-8">
     <h3><%= @user.name %> <%= render 'relationships/follow_button', user: @user %></h3>
     <br>
+    <% if @user == current_user %>
     <%= link_to 'edit', edit_user_path %>
+    <% end %>
     <ul class="nav nav-pills">
       
       <li class="nav-item"><a href="<%= followings_user_path(@user) %>" class="nav-link 

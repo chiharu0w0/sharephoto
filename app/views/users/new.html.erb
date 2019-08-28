@@ -8,7 +8,11 @@
     <%= render 'layouts/error_messages', model: f.object %>
     
     <div class="form-group">
-      <%= image_tag @user.profile_image.url if @user.profile_image? %>
+      <% if @user.profile_image? %>
+        <%= image_tag @user.profile_image.url %>
+      <% else %>
+        <%= image_tag "default_img.jpg", size: "100x100" %>
+      <% end %>
       <%= f.label :profile_image, 'Profile Image' %>
       <br>
       <%= f.file_field :profile_image %>

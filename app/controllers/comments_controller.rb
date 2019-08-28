@@ -6,9 +6,13 @@ class CommentsController < ApplicationController
     @post = Post.find(params[:post_id])
     @comment = current_user.comments.build(comment_params)
     @comment.post_id = @post.id
-    @comment.save
-    flash[:success] = 'コメントを送信しました'
-    redirect_back(fallback_location: root_url)
+    if @comment.save
+      flash[:success] = 'コメントを送信しました'
+      redirect_back(fallback_location: root_url)
+    else
+      flash[:danger] = 'コメントを送信できませんでした'
+      redirect_back(fallback_location: root_url)
+    end
   end
 
   def destroy

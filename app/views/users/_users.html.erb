@@ -4,8 +4,11 @@
 <% users.each do |user| %>
   <div class="card" style="width: 18rem; height: 18rem;">
     <div class="card-body">
-      
-      <%= image_tag user.profile_image.to_s, size: "200x200" %>
+      <% if user.profile_image? %>
+        <%#= image_tag user.profile_image.to_s, size: "200x200" %>
+      <% else %>
+        <%= image_tag "default_img.jpg", size: "200x200" %>
+      <% end %>
       <h5 class="card-title">
         <%= user.name %>
       </h5>

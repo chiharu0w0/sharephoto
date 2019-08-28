@@ -1,12 +1,19 @@
 class ImageUploader < CarrierWave::Uploader::Base
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
+  
+if Rails.env.production?
+  include Cloudinary::CarrierWave
+else
+  storage :file
+end
+  
   include CarrierWave::MiniMagick
   
   process :fix_rotation
 
   # Choose what kind of storage to use for this uploader:
-  storage :file
+  # storage :file
   # storage :fog
 
   # Override the directory where uploaded files will be stored.
@@ -31,7 +38,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   # end
 
   # Create different versions of your uploaded files:
-    process resize_to_limit: [640, 640]
+   process resize_to_limit: [640, 640]
 
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
