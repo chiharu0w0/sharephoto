@@ -2,7 +2,7 @@
 
   <%= form_with(model: current_user.favorites.find_by(post_id: post.id), local: true, method: :delete) do |f| %>
     <%= hidden_field_tag :post_id, post.id %>
-    <%= f.submit 'Unlike', class: 'btn btn-secondary btn-sm' %>
+    <%= f.submit 'Unlike', class: 'btn btn-outline-primary btn-sm' %>
   <% end %>
 
 <% else %>

@@ -6,10 +6,15 @@
   <% end %>
   
   <div class="col-sm-8">
-    <h3><%= @user.name %> <%= render 'relationships/follow_button', user: @user %></h3>
-    <br>
-    <%= link_to 'edit', edit_user_path %>
-    <ul class="nav">
+    <div class="m-3">
+    <h3><%= @user.name %></h3>
+    <% if @user == current_user %>
+      <%= link_to 'edit profile', edit_user_path, class: 'btn btn-outline-primary btn-sm' %>
+    <% else %>
+      <h3><%= render 'relationships/follow_button', user: @user %></h3>
+    <% end %>
+    </div>
+    <ul class="nav nav-pills">
       
       <li class="nav-item"><a href="<%= followings_user_path(@user) %>" class="nav-link 
         <%= 'active' if current_page?(followings_user_path(@user)) %>">Following  

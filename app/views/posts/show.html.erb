@@ -1,0 +1,29 @@
+<div class="card">
+  
+  <div class="row card-top m-3 ml-3">
+    <% if @post.user.profile_image? %>
+      <%= image_tag @post.user.profile_image.to_s, size: "100x100" %>
+    <% else %>
+      <%= image_tag "default_img.jpg", size: "100x100" %>
+    <% end %>
+    <h3 class="m-3"><%= @post.user.name %></h3>
+  </div>
+
+    <div class="card-body text-center">
+      <%= image_tag @post.image.to_s, class: "w-75" %>
+    </div>
+      
+    <div class="card-text m-3">
+      <%= @post.description %>
+    </div>
+    
+    <div class="m-3 btn-toolbar">
+      <% if current_user == @post.user %>
+      <%= link_to "Delete", @post, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-sm' %>
+      <% end %>
+      <%= render 'favorites/like_button', post: @post %>
+      
+    </div>
+  
+</div>
+  <%= render 'comments/comments', comments: @comments %>

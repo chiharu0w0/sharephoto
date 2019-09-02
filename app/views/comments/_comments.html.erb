@@ -1,0 +1,38 @@
+<% if comments.any? %>
+  <% comments.each do |comment| %>
+    <div class="card m-3">
+      <div class="card-top m-3">
+        <%= image_tag comment.user.profile_image.to_s, size: "50x50" %>
+        <% if current_user == comment.user %>
+          <%= comment.user.name %>
+        <% else %>
+          <%= link_to comment.user.name, user_path(comment.user) %>
+        <% end %>
+      </div>
+  
+      <div class="m-3">
+        <%= comment.content %>
+      </div>
+      <div class="m-3">
+        <% if current_user == comment.user %>
+        <%= link_to "Delete", comment, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-sm' %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+<% end %>
+
+<div class="card mb-5">
+  <div class="card-top mt-3 ml-3">
+  <%= image_tag current_user.profile_image.to_s, size: "50x50" %>
+  <%= current_user.name %>
+  </div>
+
+  <%= form_with(model: @comment, scope: :comment, url: post_comments_path(@post), local: true) do |f| %>
+  <div class="m-3">
+    <%= f.label :comment, "Comment" %>
+    <%= f.text_field :content, class: "form-control" %>
+  </div>
+  <%= f.submit "Send", class: 'btn btn-primary m-3' %>
+</div>
+<% end %>
