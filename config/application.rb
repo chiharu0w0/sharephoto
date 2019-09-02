@@ -21,7 +21,13 @@ module Sharephoto
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.2
+<<<<<<< HEAD
 
+=======
+    unless Rails.env.production?
+     config.web_console.whitelisted_ips = '126.35.132.84'
+    end
+>>>>>>> f38a986fe5419d48733b4bf05faccff239239532
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
